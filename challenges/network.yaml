@@ -33,3 +33,17 @@ Resources:
       Tags:
         -Key: Name
          Value: !Ref EnvironmentName
+
+  InternetGateway:
+    Type: AWS::EC2:InternetGteway
+    Properties:
+      Tags:
+        -Key: Name
+         Value: !Sub ${EnvironmentName} IGW
+
+  IGCAttachment:
+    Type: AWS:EC2::VPCGatewayAttachment
+    Properties:
+      Tags:
+        InternetGatewayId: !Ref InternetGateway
+        VpcId: !Ref VPC
