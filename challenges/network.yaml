@@ -47,3 +47,23 @@ Resources:
       Tags:
         InternetGatewayId: !Ref InternetGateway
         VpcId: !Ref VPC
+
+  PublicSubnet:
+    Type: AWS:EC2:Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PublicSubnetCIDR
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Public Subnet
+
+  PrivateSubnet:
+    Type: AWS:EC2:Subnet
+    Properties:
+      VpcId: !Ref VPC
+      CidrBlock: !Ref PrivateSubnetCIDR
+      MapPublicIpOnLaunch: false
+      Tags:
+        - Key: Name
+          Value: !Sub ${EnvironmentName} Private Subnet
