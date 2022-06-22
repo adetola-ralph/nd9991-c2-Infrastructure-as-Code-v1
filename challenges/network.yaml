@@ -101,3 +101,25 @@ Resources:
       Properties:
         RouteTableId: !Ref PublicRouteTable
         SubnetId: !Ref PublicSubnet
+
+    PrivateRouteTable:
+      Type: AWS::EC2::RouteTable
+      Properties: 
+        VpcId: !Ref VPC
+        Tags: 
+          - Key: Name 
+            Value: !Sub ${EnvironmentName} Private Routes
+
+    DefaultPrivateRoute: 
+      Type: AWS::EC2::Route
+      DependsOn: InternetGatewayAttachment
+      Properties: 
+        RouteTableId: !Ref PrivateRouteTable
+        DestinationCidrBlock: 0.0.0.0/0
+        GatewayId: !Ref NatGateway
+
+    PrivateSubnetRouteTableAssociation:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId: !Ref PrivateRouteTable
+        SubnetId: !Ref PrivateSubnet
