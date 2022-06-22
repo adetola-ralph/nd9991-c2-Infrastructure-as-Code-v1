@@ -41,7 +41,7 @@ Resources:
         -Key: Name
          Value: !Sub ${EnvironmentName} IGW
 
-  IGCAttachment:
+  IGWAttachment:
     Type: AWS::EC2::VPCGatewayAttachment
     Properties:
       Tags:
