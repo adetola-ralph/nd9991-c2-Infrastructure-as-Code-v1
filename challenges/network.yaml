@@ -42,14 +42,14 @@ Resources:
          Value: !Sub ${EnvironmentName} IGW
 
   IGCAttachment:
-    Type: AWS:EC2::VPCGatewayAttachment
+    Type: AWS::EC2::VPCGatewayAttachment
     Properties:
       Tags:
         InternetGatewayId: !Ref InternetGateway
         VpcId: !Ref VPC
 
   PublicSubnet:
-    Type: AWS:EC2:Subnet
+    Type: AWS::EC2:Subnet
     Properties:
       VpcId: !Ref VPC
       CidrBlock: !Ref PublicSubnetCIDR
