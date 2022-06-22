@@ -31,15 +31,15 @@ Resources:
       CidrBlock: !Ref VpcCIDR
       EnabledDnsHostnames: true,
       Tags:
-        -Key: Name
-         Value: !Ref EnvironmentName
+        - Key: Name
+          Value: !Ref EnvironmentName
 
   InternetGateway:
     Type: AWS::EC2:InternetGteway
     Properties:
       Tags:
-        -Key: Name
-         Value: !Sub ${EnvironmentName} IGW
+        - Key: Name
+          Value: !Sub ${EnvironmentName} IGW
 
   IGWAttachment:
     Type: AWS::EC2::VPCGatewayAttachment
@@ -80,46 +80,46 @@ Resources:
       AllocationId: !GetAtt NatGatewayElasticIP.AllowcationId
       SubnetId: !Ref PublicSubnet
 
-    PublicRouteTable:
-      Type: AWS::EC2::RouteTable
-      Properties: 
-        VpcId: !Ref VPC
-        Tags: 
-          - Key: Name 
-            Value: !Sub ${EnvironmentName} Public Routes
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties: 
+      VpcId: !Ref VPC
+      Tags: 
+        - Key: Name 
+          Value: !Sub ${EnvironmentName} Public Routes
 
-    DefaultPublicRoute: 
-      Type: AWS::EC2::Route
-      DependsOn: InternetGatewayAttachment
-      Properties: 
-        RouteTableId: !Ref PublicRouteTable
-        DestinationCidrBlock: 0.0.0.0/0
-        GatewayId: !Ref InternetGateway
+  DefaultPublicRoute: 
+    Type: AWS::EC2::Route
+    DependsOn: InternetGatewayAttachment
+    Properties: 
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref InternetGateway
 
-    PublicSubnetRouteTableAssociation:
-      Type: AWS::EC2::SubnetRouteTableAssociation
-      Properties:
-        RouteTableId: !Ref PublicRouteTable
-        SubnetId: !Ref PublicSubnet
+  PublicSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet
 
-    PrivateRouteTable:
-      Type: AWS::EC2::RouteTable
-      Properties: 
-        VpcId: !Ref VPC
-        Tags: 
-          - Key: Name 
-            Value: !Sub ${EnvironmentName} Private Routes
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties: 
+      VpcId: !Ref VPC
+      Tags: 
+        - Key: Name 
+          Value: !Sub ${EnvironmentName} Private Routes
 
-    DefaultPrivateRoute: 
-      Type: AWS::EC2::Route
-      DependsOn: InternetGatewayAttachment
-      Properties: 
-        RouteTableId: !Ref PrivateRouteTable
-        DestinationCidrBlock: 0.0.0.0/0
-        GatewayId: !Ref NatGateway
+  DefaultPrivateRoute: 
+    Type: AWS::EC2::Route
+    DependsOn: InternetGatewayAttachment
+    Properties: 
+      RouteTableId: !Ref PrivateRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref NatGateway
 
-    PrivateSubnetRouteTableAssociation:
-      Type: AWS::EC2::SubnetRouteTableAssociation
-      Properties:
-        RouteTableId: !Ref PrivateRouteTable
-        SubnetId: !Ref PrivateSubnet
+  PrivateSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable
+      SubnetId: !Ref PrivateSubnet
