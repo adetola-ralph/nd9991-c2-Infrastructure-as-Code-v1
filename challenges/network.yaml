@@ -3,3 +3,23 @@ Description: >
   This template deploys a VPC, with a single public and private subnet.
   It deploys an IGW (Internet Gateway) with default route on the public subnet.
   It deploys a NAT Gateway in the public subnet for the private subnet.
+
+Parameters:
+  EnvironmentName:
+    Description: An environment name that will be prefixed to the resource names
+    Type: String
+
+  VpcCIDR:
+    Description: IP Range (CIDR notation) for this VPC
+    Type: String
+    Default: 10.0.0.0/16
+
+  PublicSubnetCIDR:
+    Description: IP Range (CIDR notation) for the public subnet
+    Type: String
+    Default: 10.0.1.0/24
+
+  PrivateSubnetCIDR:
+    Description: IP Range (CIDR notation) for the private subnet
+    Type: String
+    Default: 10.0.2.0/24
