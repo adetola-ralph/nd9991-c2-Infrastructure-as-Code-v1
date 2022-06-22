@@ -1,0 +1,5 @@
+Description: >
+  Oreofeoluwapo Olutola Udacity Challenge 2
+  This template deploys a VPC, with a single public and private subnet.
+  It deploys an IGW (Internet Gateway) with default route on the public subnet.
+  It deploys a NAT Gateway in the public subnet for the private subnet.
