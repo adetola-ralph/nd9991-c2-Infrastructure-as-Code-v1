@@ -23,3 +23,13 @@ Parameters:
     Description: IP Range (CIDR notation) for the private subnet
     Type: String
     Default: 10.0.2.0/24
+
+Resources:
+  VPC:
+    Type: AWS::EC2:VPC
+    Properties:
+      CidrBlock: !Ref VpcCIDR
+      EnabledDnsHostnames: true,
+      Tags:
+        -Key: Name
+         Value: !Ref EnvironmentName
